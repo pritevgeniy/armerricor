@@ -11,11 +11,6 @@ use app\models\History;
 use app\widgets\Export\Export;
 use app\widgets\HistoryList\helpers\HistoryListHelper;
 
-$filename = 'history';
-$filename .= '-' . time();
-
-ini_set('max_execution_time', 0);
-ini_set('memory_limit', '2048M');
 ?>
 
 <?= Export::widget([
@@ -52,6 +47,6 @@ ini_set('memory_limit', '2048M');
         ]
     ],
     'exportType' => $exportType,
-    'batchSize' => 2000,
-    'filename' => $filename
+    'batchSize' => 200,
+    'filename' => 'history-' . time()
 ]);
