@@ -8,8 +8,8 @@
  */
 
 use app\models\History;
+use app\models\interfaces\EventInterface;
 use app\widgets\Export\Export;
-use app\widgets\HistoryList\helpers\HistoryListHelper;
 
 ?>
 
@@ -42,7 +42,11 @@ use app\widgets\HistoryList\helpers\HistoryListHelper;
         [
             'label' => Yii::t('app', 'Message'),
             'value' => function (History $model) {
-                return strip_tags(HistoryListHelper::getBodyByModel($model));
+                $serviceEvent = Yii::$container->get(\app\services\EventService::class);
+                /** @var EventInterface $event */
+                $event = $serviceEvent->getModel($model);
+
+                return strip_tags($event->getBody());
             }
         ]
     ],

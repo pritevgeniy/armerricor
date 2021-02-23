@@ -2,7 +2,15 @@
 
 namespace app\controllers;
 
+use app\models\events\CallIncoming;
+use app\models\events\CustomerChangeQuality;
+use app\models\events\FaxOutGoing;
+use app\models\events\IncomingSms;
+use app\models\events\SmsIncoming;
+use app\models\events\TaskCreated;
+use app\models\History;
 use app\models\search\HistorySearch;
+use app\services\EventService;
 use Yii;
 use yii\web\Controller;
 
