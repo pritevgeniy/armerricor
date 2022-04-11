@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace app\models;
 
@@ -28,7 +29,7 @@ class Customer extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return '{{%customer}}';
     }
@@ -36,7 +37,7 @@ class Customer extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['name'], 'string', 'max' => 255],
@@ -46,7 +47,7 @@ class Customer extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'name' => Yii::t('app', 'Name'),
@@ -56,7 +57,7 @@ class Customer extends ActiveRecord
     /**
      * @return array
      */
-    public static function getQualityTexts()
+    public static function getQualityTexts(): array
     {
         return [
             self::QUALITY_ACTIVE => Yii::t('app', 'Active'),
@@ -79,7 +80,7 @@ class Customer extends ActiveRecord
     /**
      * @return array
      */
-    public static function getTypeTexts()
+    public static function getTypeTexts(): array
     {
         return [
             self::TYPE_LEAD => Yii::t('app', 'Lead'),

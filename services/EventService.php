@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace app\services;
 
@@ -37,7 +38,7 @@ class EventService
     /**
      * @return array
      */
-    public static function getEventTexts()
+    public static function getEventTexts(): array
     {
         return [
             self::EVENT_CREATED_TASK => Yii::t('app', 'Task created'),
