@@ -14,7 +14,7 @@ $config = [
     'name' => 'Americor Test',
     'container' => [
         'singletons' => [
-            'EventService' => ['class' => 'app\services\EventService'],
+            'EventService' => ['class' => 'app\services\EventFactory'],
         ],
     ],
     'components' => [

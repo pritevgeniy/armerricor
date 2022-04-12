@@ -1,11 +1,11 @@
 <?php
 use app\models\search\HistorySearch;
-use app\services\EventService;
+use app\services\EventFactory;
 
 /** @var $model HistorySearch */
 
-$serviceEvent = Yii::$container->get(EventService::class);
-$event = $serviceEvent->getModel($model);
+$serviceEvent = Yii::$container->get(EventFactory::class);
+$event = $serviceEvent->create($model);
 
 echo $this->render($event->getView(), [
     'user' => $event->getUser(),

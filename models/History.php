@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use app\services\EventService;
+use app\services\EventFactory;
 use app\models\traits\ObjectNameTrait;
 use Yii;
 use yii\db\ActiveQuery;
@@ -99,7 +99,7 @@ class History extends ActiveRecord
      */
     public function getEventText(): string
     {
-        $event = Yii::$container->get(EventService::class)->getModel($this->event);
+        $event = Yii::$container->get(EventFactory::class)->create($this);
 
         return $event->getText();
     }

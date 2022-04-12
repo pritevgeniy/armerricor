@@ -23,7 +23,7 @@ use app\models\interfaces\EventInterface;
  */
 abstract class EventEntity implements EventInterface
 {
-    private $model;
+    protected $model;
     private $user;
     private $body;
     private $content;
