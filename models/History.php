@@ -93,20 +93,15 @@ class History extends ActiveRecord
     }
 
     /**
-     * @param $event
-     * @return mixed
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\di\NotInstantiableException
      */
-    public static function getEventTextByEvent($event)
+    public function getEventText(): string
     {
-        return Yii::$container->get(EventService::class)->getEventTexts()[$event] ?? $event;
-    }
+        $event = Yii::$container->get(EventService::class)->getModel($this->event);
 
-    /**
-     * @return mixed|string
-     */
-    public function getEventText()
-    {
-        return static::getEventTextByEvent($this->event);
+        return $event->getText();
     }
 
 

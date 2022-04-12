@@ -2,6 +2,7 @@
 
 namespace app\models\events;
 
+use Yii;
 use app\models\Customer;
 use app\models\events\abstracts\CustomerEntity;
 
@@ -22,5 +23,10 @@ class CustomerChangeType extends CustomerEntity
         return $this->getModel()->eventText . " " .
             (Customer::getTypeTextByType($this->getModel()->getDetailOldValue('type')) ?? "not set") . ' to ' .
             (Customer::getTypeTextByType($this->getModel()->getDetailNewValue('type')) ?? "not set");
+    }
+
+    public function getText(): string
+    {
+        return Yii::t('app', 'Type changed');
     }
 }

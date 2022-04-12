@@ -50,4 +50,9 @@ abstract class SmsEntity extends EventEntity
     {
         return '_item_common';
     }
+
+    public function getText(): string
+    {
+        return Yii::t('app', 'Task completed');
+    }
 }
