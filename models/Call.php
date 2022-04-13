@@ -40,7 +40,7 @@ class Call extends ActiveRecord
     const DIRECTION_INCOMING = 0;
     const DIRECTION_OUTGOING = 1;
 
-    public int $duration = 720;
+    public $duration = 720;
 
     /**
      * @inheritdoc

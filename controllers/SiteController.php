@@ -9,7 +9,7 @@ use app\models\search\HistorySearch;
 
 class SiteController extends Controller
 {
-    private HistorySearch $historySearch;
+    private $historySearch;
 
     /**
      * {@inheritdoc}
@@ -47,7 +47,7 @@ class SiteController extends Controller
      */
     public function actionExport(string $exportType): string
     {
-        ini_set('max_execution_time', 0);
+        ini_set('max_execution_time', '0');
         ini_set('memory_limit', '2048M');
 
         return $this->render('export', [

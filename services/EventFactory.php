@@ -36,7 +36,7 @@ class EventFactory
     public const EVENT_CUSTOMER_CHANGE_TYPE = 'customer_change_type';
     public const EVENT_CUSTOMER_CHANGE_QUALITY = 'customer_change_quality';
 
-    private array $map = [
+    private $map = [
         self::EVENT_CREATED_TASK => TaskCreated::class,
         self::EVENT_UPDATED_TASK => TaskUpdated::class,
         self::EVENT_COMPLETED_TASK => TaskCompleted::class,
