@@ -2,7 +2,7 @@
 
 namespace app\services\bootstrap;
 
-use app\services\EventService;
+use app\services\EventFactory;
 use yii\base\BootstrapInterface;
 
 
@@ -11,6 +11,6 @@ class Bootstrap implements BootstrapInterface
     public function bootstrap($app)
     {
         $container = \Yii::$container;
-        $container->setSingleton(EventService::class, EventService::class);
+        $container->setSingleton(EventFactory::class, EventFactory::class);
     }
 }

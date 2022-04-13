@@ -48,6 +48,8 @@ class m191111_090949_init extends Migration
 
         $this->addForeignKey('fk_history__customer_id', 'history', 'customer_id', 'customer', 'id', 'RESTRICT', 'CASCADE');
         $this->addForeignKey('fk_history__user_id', 'history', 'user_id', 'user', 'id', 'RESTRICT', 'CASCADE');
+        $this->createIndex('I_user_id', '{{%history}}', 'user_id');
+        $this->createIndex('I_customer_id', '{{%history}}', 'customer_id');
 
 
         $this->createTable('{{%call}}', [
@@ -64,6 +66,8 @@ class m191111_090949_init extends Migration
 
         $this->addForeignKey('fk_call__user_id', 'call', 'user_id', 'user', 'id', 'RESTRICT', 'CASCADE');
         $this->addForeignKey('fk_call__customer_id', 'call', 'customer_id', 'customer', 'id', 'RESTRICT', 'CASCADE');
+        $this->createIndex('I_user_id', '{{%call}}', 'user_id');
+        $this->createIndex('I_customer_id', '{{%call}}', 'customer_id');
 
 
         $this->createTable('{{%fax}}', [
@@ -77,6 +81,7 @@ class m191111_090949_init extends Migration
         ], $tableOptions);
 
         $this->addForeignKey('fk_fax__user_id', 'fax', 'user_id', 'user', 'id', 'RESTRICT', 'CASCADE');
+        $this->createIndex('I_user_id', '{{%fax}}', 'user_id');
 
 
         $this->createTable('{{%sms}}', [
@@ -92,6 +97,8 @@ class m191111_090949_init extends Migration
 
         $this->addForeignKey('fk_sms__user_id', 'sms', 'user_id', 'user', 'id', 'RESTRICT', 'CASCADE');
         $this->addForeignKey('fk_sms__customer_id', 'sms', 'customer_id', 'customer', 'id', 'RESTRICT', 'CASCADE');
+        $this->createIndex('I_customer_id', '{{%sms}}', 'customer_id');
+        $this->createIndex('I_user_id', '{{%sms}}', 'user_id');
 
 
         $this->createTable('{{%task}}', [
@@ -107,7 +114,8 @@ class m191111_090949_init extends Migration
 
         $this->addForeignKey('fk_task__user_id', 'task', 'user_id', 'user', 'id', 'RESTRICT', 'CASCADE');
         $this->addForeignKey('fk_task__customer_id', 'task', 'customer_id', 'customer', 'id', 'RESTRICT', 'CASCADE');
-
+        $this->createIndex('I_customer_id', '{{%task}}', 'customer_id');
+        $this->createIndex('I_user_id', '{{%task}}', 'user_id');
 
     }
 

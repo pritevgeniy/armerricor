@@ -10,6 +10,7 @@
 use app\models\History;
 use app\models\interfaces\EventInterface;
 use app\widgets\Export\Export;
+use app\services\EventFactory;
 
 ?>
 
@@ -42,9 +43,9 @@ use app\widgets\Export\Export;
         [
             'label' => Yii::t('app', 'Message'),
             'value' => function (History $model) {
-                $serviceEvent = Yii::$container->get(\app\services\EventService::class);
+                $serviceEvent = Yii::$container->get(EventFactory::class);
                 /** @var EventInterface $event */
-                $event = $serviceEvent->getModel($model);
+                $event = $serviceEvent->create($model);
 
                 return strip_tags($event->getBody());
             }

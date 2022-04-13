@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace app\models;
 
@@ -32,15 +33,15 @@ class Fax extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function tableName(): string
     {
-        return 'fax';
+        return '{{%fax}}';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['type'], 'required'],
@@ -54,7 +55,7 @@ class Fax extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => Yii::t('app', 'ID'),
@@ -68,7 +69,7 @@ class Fax extends ActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getUser()
+    public function getUser(): ActiveQuery
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
@@ -76,7 +77,7 @@ class Fax extends ActiveRecord
     /**
      * @return array
      */
-    public static function getTypeTexts()
+    public static function getTypeTexts(): array
     {
         return [
             self::TYPE_POA_ATC => Yii::t('app', 'POA/ATC'),

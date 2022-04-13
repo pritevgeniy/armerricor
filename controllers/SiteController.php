@@ -1,26 +1,20 @@
 <?php
+declare(strict_types=1);
 
 namespace app\controllers;
 
-use app\models\events\CallIncoming;
-use app\models\events\CustomerChangeQuality;
-use app\models\events\FaxOutGoing;
-use app\models\events\IncomingSms;
-use app\models\events\SmsIncoming;
-use app\models\events\TaskCreated;
-use app\models\History;
-use app\models\search\HistorySearch;
-use app\services\EventService;
 use Yii;
 use yii\web\Controller;
+use app\models\search\HistorySearch;
 
 class SiteController extends Controller
 {
+    private $historySearch;
 
     /**
      * {@inheritdoc}
      */
-    public function actions()
+    public function actions(): array
     {
         return [
             'error' => [
@@ -29,12 +23,19 @@ class SiteController extends Controller
         ];
     }
 
+    public function __construct($id, $module, HistorySearch $historySearch,  $config = [])
+    {
+        $this->historySearch = $historySearch;
+
+        parent::__construct($id, $module, $config);
+    }
+
     /**
      * Displays homepage.
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         return $this->render('index');
     }
@@ -44,17 +45,15 @@ class SiteController extends Controller
      * @param string $exportType
      * @return string
      */
-    public function actionExport($exportType)
+    public function actionExport(string $exportType): string
     {
-        ini_set('max_execution_time', 0);
+        ini_set('max_execution_time', '0');
         ini_set('memory_limit', '2048M');
 
-        $model = new HistorySearch();
-
         return $this->render('export', [
-            'dataProvider' => $model->search(Yii::$app->request->queryParams),
+            'dataProvider' => $this->historySearch->search(Yii::$app->request->queryParams),
             'exportType' => $exportType,
-            'model' => $model
+            'model' => $this->historySearch
         ]);
     }
 }

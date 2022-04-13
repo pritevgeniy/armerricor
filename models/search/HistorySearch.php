@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace app\models\search;
 
@@ -16,7 +17,7 @@ class HistorySearch extends History
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [];
     }
@@ -24,7 +25,7 @@ class HistorySearch extends History
     /**
      * @inheritdoc
      */
-    public function scenarios()
+    public function scenarios(): array
     {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
@@ -33,11 +34,11 @@ class HistorySearch extends History
     /**
      * Creates data provider instance with search query applied
      *
-     * @param array $params
+     * @param array|null $params
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search(?array $params = []): ActiveDataProvider
     {
         $query = History::find();
 
@@ -56,7 +57,9 @@ class HistorySearch extends History
 
         $this->load($params);
 
-        if (!$this->validate()) {
+        if ($this->validate() === false) {
+            //Вообще валидация должна быть в контроллере и вызываться ошибка ValidationException
+            //но видимо бизнесу нужно отсутствие значений
             // uncomment the following line if you do not want to return any records when validation fails
             $query->where('0=1');
             return $dataProvider;

@@ -13,4 +13,5 @@ interface EventInterface
     public function getModel();
     public function getOldValue();
     public function getNewValue();
+    public function getText();
 }

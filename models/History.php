@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use app\services\EventService;
+use app\services\EventFactory;
 use app\models\traits\ObjectNameTrait;
 use Yii;
 use yii\db\ActiveQuery;
@@ -79,7 +79,7 @@ class History extends ActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getCustomer()
+    public function getCustomer(): ActiveQuery
     {
         return $this->hasOne(Customer::class, ['id' => 'customer_id']);
     }
@@ -87,26 +87,21 @@ class History extends ActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getUser()
+    public function getUser(): ActiveQuery
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
     /**
-     * @param $event
-     * @return mixed
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\di\NotInstantiableException
      */
-    public static function getEventTextByEvent($event)
+    public function getEventText(): string
     {
-        return Yii::$container->get(EventService::class)->getEventTexts()[$event] ?? $event;
-    }
+        $event = Yii::$container->get(EventFactory::class)->create($this);
 
-    /**
-     * @return mixed|string
-     */
-    public function getEventText()
-    {
-        return static::getEventTextByEvent($this->event);
+        return $event->getText();
     }
 
 

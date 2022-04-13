@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace app\models;
 
@@ -44,7 +45,7 @@ class Call extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return '{{%call}}';
     }
@@ -52,7 +53,7 @@ class Call extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['ins_ts'], 'safe'],
@@ -67,7 +68,7 @@ class Call extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => Yii::t('app', 'ID'),
@@ -88,7 +89,7 @@ class Call extends ActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getCustomer()
+    public function getCustomer(): ActiveQuery
     {
         return $this->hasOne(Customer::class, ['id' => 'customer_id']);
     }
@@ -96,7 +97,7 @@ class Call extends ActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getUser()
+    public function getUser(): ActiveQuery
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
@@ -104,9 +105,9 @@ class Call extends ActiveRecord
     /**
      * @return string
      */
-    public function getClient_phone()
+    public function getClientPhone(): string
     {
-        return $this->direction == self::DIRECTION_INCOMING ? $this->phone_from : $this->phone_to;
+        return $this->direction === self::DIRECTION_INCOMING ? $this->phone_from : $this->phone_to;
     }
 
     /**
@@ -141,7 +142,7 @@ class Call extends ActiveRecord
      * @param bool $hasComment
      * @return string
      */
-    public function getTotalDisposition($hasComment = true)
+    public function getTotalDisposition(?bool $hasComment = true): string
     {
         $t = [];
         if ($hasComment && $this->comment) {
@@ -153,7 +154,7 @@ class Call extends ActiveRecord
     /**
      * @return array
      */
-    public static function getFullDirectionTexts()
+    public static function getFullDirectionTexts(): array
     {
         return [
             self::DIRECTION_INCOMING => Yii::t('app', 'Incoming Call'),
@@ -172,7 +173,7 @@ class Call extends ActiveRecord
     /**
      * @return string
      */
-    public function getDurationText()
+    public function getDurationText(): string
     {
         if (!is_null($this->duration)) {
             return $this->duration >= 3600 ? gmdate("H:i:s", $this->duration) : gmdate("i:s", $this->duration);
